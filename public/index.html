@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TaskFlow | Enterprise Task Management</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="landing-page d-flex flex-column min-vh-100">
+    <!-- NAVBAR -->
+    <nav class="top-navbar">
+      <div class="nav-left">
+        <span class="nav-logo">TaskFlow</span>
+      </div>
+
+      <div class="nav-right">
+        <a href="login.html" class="nav-link-landing">Login</a>
+        <a href="dashboard.html" class="nav-cta">Launch App</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <!-- LEFT: TEXT -->
+        <div class="hero-content">
+          <h1>Enterprise Task Management</h1>
+          <p>
+            Plan, track, and manage work efficiently — built for modern teams
+            and productivity.
+          </p>
+
+          <div class="hero-actions">
+            <a href="login.html" class="btn-primary">Get Started</a>
+            <a href="#features" class="btn-secondary">Explore Features</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: IMAGE -->
+        <div class="hero-visual">
+          <img
+            src="/svg1.svg"
+            alt="TaskFlow dashboard preview"
+            class="hero-image"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card fade-up">
+              <i class="bi bi-kanban"></i>
+              <h5>Smart Planning</h5>
+              <p>Organize tasks with priorities, deadlines, and clarity.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card fade-up">
+              <i class="bi bi-shield-lock"></i>
+              <h5>Secure</h5>
+              <p>Built with modern security and safe data handling.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card fade-up">
+              <i class="bi bi-lightning-charge"></i>
+              <h5>Fast</h5>
+              <p>Optimized UI & APIs for smooth performance.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card fade-up">
+              <i class="bi bi-people"></i>
+              <h5>Team Ready</h5>
+              <p>Designed for teams and scalable workflows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="landing-footer mt-auto">
+      © 2026 TaskFlow. All rights reserved.
+    </footer>
+  </body>
+</html>

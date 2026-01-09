@@ -1,0 +1,1887 @@
+/* =====================================================
+   GLOBAL
+===================================================== */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  height: auto;
+}
+
+body {
+  color: #e5e7eb;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(236, 72, 153, 0.18),
+      transparent 40%
+    ),
+    linear-gradient(180deg, #0e1117, #020617);
+}
+
+/* ===============================
+   OVERFLOW SAFETY
+================================ */
+html,
+body {
+  overflow-x: hidden;
+}
+
+.main-content {
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   APP LAYOUT
+===================================================== */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===============================
+   LANDING HERO (IMAGE + GRADIENT)
+================================ */
+.hero {
+  min-height: 100vh;
+  padding-top: 90px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.85)),
+    url("https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1920&q=80");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ===============================
+   TRUE CENTERING FIX (FORMS)
+================================ */
+.center-wrapper {
+  min-height: calc(100vh - 120px); /* accounts for footer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* =====================================================
+   SIDEBAR — MODERN & POLISHED
+===================================================== */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 72px;
+  padding: 20px 14px;
+  background: linear-gradient(180deg, #0b132b, #020617);
+  box-shadow: 12px 0 40px rgba(0, 0, 0, 0.75);
+  transition: width 0.35s ease;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  width: 260px;
+}
+
+/* Toggle buttons */
+.sidebar-toggle,
+.sidebar-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.sidebar-toggle:hover,
+.sidebar-close:hover {
+  background: rgba(99, 102, 241, 0.25);
+  transform: scale(1.08);
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  display: none;
+}
+
+.sidebar.open .sidebar-close {
+  display: flex;
+}
+
+/* Logo */
+.sidebar-logo {
+  margin: 30px 0;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sidebar:not(.open) .logo {
+  display: none;
+}
+
+/* Navigation */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  color: #c7d2fe;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-link i {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.sidebar:not(.open) .nav-link {
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.sidebar:not(.open) .link-text {
+  display: none;
+}
+
+/* Hover & active effects */
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(6px);
+  color: #fff;
+}
+
+.nav-link:hover i {
+  transform: scale(1.25);
+  color: #a5b4fc;
+}
+
+.nav-link.active {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.35),
+    rgba(139, 92, 246, 0.35)
+  );
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+.main-content {
+  margin-left: 72px;
+  width: calc(100% - 72px);
+  padding: 80px 60px 140px;
+  transition: margin-left 0.35s ease, width 0.35s ease;
+}
+
+.sidebar.open ~ .main-content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+}
+
+/* =====================================================
+   DASHBOARD HERO
+===================================================== */
+.dashboard-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 70px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  box-shadow: 0 60px 120px rgba(0, 0, 0, 0.65);
+  text-align: center;
+}
+
+.dashboard-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+}
+
+.dashboard-hero p {
+  opacity: 0.9;
+  margin-bottom: 32px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 16px;
+  padding: 14px 34px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 28px 55px rgba(99, 102, 241, 0.55);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 72px;
+  right: 0;
+  padding: 14px;
+  text-align: center;
+  background: #020617;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  transition: left 0.35s ease;
+}
+
+.sidebar.open ~ .footer {
+  left: 260px;
+}
+/* =====================================================
+   LANDING PAGE ISOLATION (DOES NOT AFFECT APP)
+===================================================== */
+
+body.landing-page {
+  overflow-x: hidden;
+}
+
+/* prevent app layout leakage */
+body.landing-page .app-wrapper,
+body.landing-page .sidebar,
+body.landing-page .main-content {
+  display: none !important;
+}
+
+/* HERO FIX */
+body.landing-page .hero {
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background: radial-gradient(
+      circle at 25% 25%,
+      rgba(99, 102, 241, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(236, 72, 153, 0.18),
+      transparent 45%
+    ),
+    linear-gradient(180deg, #0e1117, #020617);
+}
+
+/* LANDING FOOTER (NOT FIXED) */
+.landing-footer {
+  background: transparent;
+  text-align: center;
+  padding: 18px 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* override fixed footer from app */
+body.landing-page .footer {
+  position: static !important;
+}
+/* =====================================================
+   AUTH PAGES (LOGIN / SIGNUP)
+===================================================== */
+
+body.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* wrapper */
+.auth-wrapper {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* glass card */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 45px 40px;
+  border-radius: 26px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 40px 80px rgba(0, 0, 0, 0.7);
+
+  text-align: center;
+}
+
+/* typography */
+.auth-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+/* inputs already styled globally, just spacing tweak */
+.auth-card .form-control {
+  text-align: left;
+}
+
+/* hint text */
+.auth-hint {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ===============================
+   AUTH / FORM CARDS (PRO)
+================================ */
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 40px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 40px 90px rgba(0, 0, 0, 0.75);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* input spacing consistency */
+.auth-card .form-control,
+.auth-card .form-select {
+  margin-bottom: 18px;
+}
+
+/* submit buttons */
+.auth-card .btn-primary {
+  width: 100%;
+  margin-top: 10px;
+}
+/* ===============================
+   PAGE TRANSITIONS
+================================ */
+body {
+  animation: pageFade 0.5s ease forwards;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+a {
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+a:hover {
+  transform: translateY(-1px);
+}
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  color: #e5e7eb;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(236, 72, 153, 0.18),
+      transparent 40%
+    ),
+    linear-gradient(180deg, #0e1117, #020617);
+}
+
+/* prevent horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   LANDING PAGE ISOLATION
+===================================================== */
+body.landing-page {
+  overflow-x: hidden;
+}
+
+body.landing-page .app-wrapper,
+body.landing-page .sidebar,
+body.landing-page .main-content {
+  display: none !important;
+}
+
+/* =====================================================
+   HERO (IMAGE + GRADIENT FIX)
+===================================================== */
+.hero {
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.9)),
+    url("https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1920&q=80");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-inner {
+  max-width: 900px;
+  padding: 40px;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+}
+
+.hero p {
+  margin: 20px auto 40px;
+  max-width: 640px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* secondary CTA */
+.btn-secondary {
+  padding: 14px 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   FEATURES SECTION
+===================================================== */
+.features-section {
+  padding: 100px 0 80px;
+}
+
+.feature-card {
+  height: 100%;
+  padding: 32px 26px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 30px 70px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  transition: all 0.35s ease;
+}
+
+.feature-card i {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  color: #a5b4fc;
+}
+
+.feature-card h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 45px 90px rgba(0, 0, 0, 0.8);
+}
+
+/* =====================================================
+   LANDING FOOTER
+===================================================== */
+.landing-footer {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* =====================================================
+   PAGE TRANSITIONS
+===================================================== */
+body {
+  animation: pageFade 0.5s ease forwards;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+
+body {
+  color: #e5e7eb;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(236, 72, 153, 0.18),
+      transparent 40%
+    ),
+    linear-gradient(180deg, #0e1117, #020617);
+}
+
+/* prevent horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   LANDING PAGE ISOLATION
+===================================================== */
+body.landing-page {
+  overflow-x: hidden;
+}
+
+body.landing-page .app-wrapper,
+body.landing-page .sidebar,
+body.landing-page .main-content {
+  display: none !important;
+}
+
+/* =====================================================
+   HERO (IMAGE + GRADIENT FIX)
+===================================================== */
+.hero {
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.9)),
+    url("https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1920&q=80");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-inner {
+  max-width: 900px;
+  padding: 40px;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+}
+
+.hero p {
+  margin: 20px auto 40px;
+  max-width: 640px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* secondary CTA */
+.btn-secondary {
+  padding: 14px 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   FEATURES SECTION
+===================================================== */
+.features-section {
+  padding: 100px 0 80px;
+}
+
+.feature-card {
+  height: 100%;
+  padding: 32px 26px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 30px 70px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  transition: all 0.35s ease;
+}
+
+.feature-card i {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  color: #a5b4fc;
+}
+
+.feature-card h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 45px 90px rgba(0, 0, 0, 0.8);
+}
+
+/* =====================================================
+   LANDING FOOTER
+===================================================== */
+.landing-footer {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* =====================================================
+   PAGE TRANSITIONS
+===================================================== */
+body {
+  animation: pageFade 0.5s ease forwards;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FEATURES SECTION (LANDING ONLY) */
+body.landing-page .features-section {
+  padding: 100px 0 80px;
+}
+
+body.landing-page .feature-card {
+  height: 100%;
+  padding: 32px 26px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 30px 70px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  transition: all 0.35s ease;
+}
+
+body.landing-page .feature-card i {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  color: #a5b4fc;
+}
+
+body.landing-page .feature-card h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+body.landing-page .feature-card p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+body.landing-page .feature-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 45px 90px rgba(0, 0, 0, 0.8);
+}
+
+/* ===============================
+   TASK TABS
+================================ */
+.task-tabs {
+  display: flex;
+  gap: 14px;
+  margin: 40px 0 30px;
+}
+
+.task-tab {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #c7d2fe;
+  padding: 10px 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.task-tab.active,
+.task-tab:hover {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+
+/* ===============================
+   TASK VIEWS
+================================ */
+.task-view {
+  display: none;
+}
+
+.task-view.active {
+  display: block;
+}
+
+/* ===============================
+   TASK STATES
+================================ */
+.task-card.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.task-card.deleted {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+/* ===============================
+   FLOATING BACK BUTTON
+================================ */
+.fab-back {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
+/* =========================
+   TASK TABS
+========================= */
+.task-tabs {
+  display: flex;
+  gap: 12px;
+  margin: 40px 0 30px;
+}
+
+.task-tab {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #e5e7eb;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.task-tab:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.task-tab.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+
+/* =========================
+   TASK VIEWS
+========================= */
+.task-view {
+  display: none;
+}
+
+.task-view.active {
+  display: block;
+}
+/* =====================================================
+   TASK CARD – MODERN / VIBRANT / ANIMATED
+===================================================== */
+
+.task-card {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.03)
+  );
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 25px 50px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+/* subtle glow gradient */
+.task-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(99, 102, 241, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.task-card:hover::before {
+  opacity: 1;
+}
+
+.task-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 40px 90px rgba(0, 0, 0, 0.75);
+}
+
+/* =====================================================
+   TASK TEXT
+===================================================== */
+
+.task-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.task-desc {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+.task-date {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin-top: 14px;
+}
+
+/* =====================================================
+   PRIORITY BADGES (VIBRANT)
+===================================================== */
+
+.badge-priority {
+  font-size: 0.7rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+/* priority colors */
+.priority-Low {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #052e16;
+}
+
+.priority-Medium {
+  background: linear-gradient(135deg, #facc15, #fde047);
+  color: #422006;
+}
+
+.priority-High {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #450a0a;
+}
+
+/* =====================================================
+   TASK ACTION BUTTONS
+===================================================== */
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* base */
+.task-actions button {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+/* COMPLETE (GREEN) */
+.task-actions button:first-child {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #ecfdf5;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
+}
+
+.task-actions button:first-child:hover {
+  transform: scale(1.15);
+  box-shadow: 0 15px 40px rgba(34, 197, 94, 0.6);
+}
+
+/* DELETE (RED) */
+.task-actions button:last-child {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fee2e2;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.35);
+}
+
+.task-actions button:last-child:hover {
+  transform: scale(1.15);
+  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.6);
+}
+
+/* =====================================================
+   ENTRY ANIMATION
+===================================================== */
+
+.fade-up {
+  animation: taskFadeUp 0.7s ease both;
+}
+
+@keyframes taskFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   PAGE FORM CENTERING FIX (NON-LANDING)
+===================================================== */
+
+.page-center {
+  min-height: calc(100vh - 120px); /* footer + breathing space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* glass form consistency */
+.glass-card {
+  margin-bottom: 80px; /* prevents footer overlap */
+}
+
+/* =====================================================
+   FLOATING BACK TO LANDING BUTTON
+===================================================== */
+
+/* =====================================================
+   FLOATING BACK BUTTON – SAFE POSITION
+===================================================== */
+
+.back-to-home {
+  position: fixed;
+  bottom: 90px; /* ⬅ ABOVE footer */
+  right: 28px;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.25rem;
+  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+
+  z-index: 999; /* ⬅ above sidebar + footer */
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.back-to-home:hover {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 25px 60px rgba(99, 102, 241, 0.7);
+}
+
+/* =====================================================
+   CENTER FIX FOR add-task / contact / login
+   (matches current HTML: .center-wrapper)
+===================================================== */
+
+.center-wrapper {
+  min-height: calc(100vh - 120px); /* footer space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* ensure card never sticks to footer */
+.center-wrapper .glass-card {
+  margin-bottom: 80px;
+}
+/* =====================================================
+   FINAL CENTERING FIX (FORMS)
+===================================================== */
+
+.main-content {
+  position: relative;
+}
+
+/* true vertical centering */
+.center-wrapper {
+  min-height: calc(100vh - 160px); /* header + footer safe zone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* ensure card never overlaps footer */
+.center-wrapper .glass-card {
+  margin-bottom: 120px;
+}
+
+.footer {
+  height: 60px;
+  line-height: 60px;
+}
+
+/* =====================================================
+   🔥 FINAL OVERRIDE FIX — DO NOT MOVE
+   Resolves centering + footer conflicts safely
+===================================================== */
+
+/* ---- Normalize footer height ---- */
+:root {
+  --footer-height: 60px;
+}
+
+/* Ensure footer height is consistent */
+.footer {
+  height: var(--footer-height);
+  line-height: var(--footer-height);
+}
+
+/* ---- TRUE CENTERING FOR FORM PAGES ---- */
+/* add-task.html, contact.html, login.html */
+
+.center-wrapper {
+  min-height: calc(100vh - var(--footer-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Prevent overlap with fixed footer */
+.center-wrapper > * {
+  margin-bottom: var(--footer-height);
+}
+
+/* ---- Ensure main-content does not break centering ---- */
+.main-content {
+  padding-bottom: calc(var(--footer-height) + 80px);
+}
+
+/* ---- Floating Back Button (final safe position) ---- */
+.back-to-home,
+.fab-back {
+  bottom: calc(var(--footer-height) + 24px);
+  z-index: 1000;
+}
+
+/* =====================================================
+   TASK TABS (FILTERS)
+===================================================== */
+.task-tabs {
+  display: flex;
+  gap: 12px;
+  margin: 40px 0 30px;
+}
+
+.task-tab {
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #c7d2fe;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.task-tab:hover {
+  background: rgba(99, 102, 241, 0.25);
+  color: #fff;
+}
+
+.task-tab.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45);
+}
+
+/* =====================================================
+   TASK CARD GRID
+===================================================== */
+#taskGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================================================
+   TASK CARD
+===================================================== */
+.task-card {
+  position: relative;
+  padding: 20px 16px;
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.04)
+  );
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  animation: taskFadeUp 0.45s ease both;
+  width: 30.2rem;
+}
+
+.task-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.7);
+}
+
+/* =====================================================
+   TASK HEADER
+===================================================== */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* =====================================================
+   PRIORITY BADGES
+===================================================== */
+.badge-priority {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.priority-low {
+  background: rgba(34, 197, 94, 0.25);
+  color: #22c55e;
+}
+
+.priority-medium {
+  background: rgba(251, 191, 36, 0.25);
+  color: #facc15;
+}
+
+.priority-high {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+}
+
+/* =====================================================
+   TASK TITLE & META
+===================================================== */
+.task-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 14px 0 6px;
+  color: #fff;
+}
+
+.task-desc {
+  position: relative;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-date {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.task-actions button {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Complete */
+.task-actions .btn-complete {
+  background: rgba(34, 197, 94, 0.25);
+  color: #22c55e;
+}
+
+.task-actions .btn-complete:hover {
+  background: rgba(34, 197, 94, 0.45);
+  transform: scale(1.12);
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.45);
+}
+
+/* Delete */
+.task-actions .btn-delete {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+}
+
+.task-actions .btn-delete:hover {
+  background: rgba(239, 68, 68, 0.45);
+  transform: scale(1.12);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.45);
+}
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+@keyframes taskFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   COMPACT TASK CARD (SIZE REDUCTION)
+===================================================== */
+
+/* Header alignment */
+.task-header {
+  align-items: center;
+}
+
+/* Priority badge smaller */
+.badge-priority {
+  padding: 4px 10px;
+  font-size: 0.65rem;
+}
+
+/* Action buttons smaller */
+.task-actions button {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.task-desc::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40%;
+  height: 1.2em;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.6));
+}
+
+.task-actions {
+  position: relative;
+  z-index: 5;
+}
+
+.task-actions button {
+  pointer-events: auto;
+}
+
+/* =====================================================
+   PREMIUM LANDING NAVBAR
+===================================================== */
+
+.top-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  height: 80px;
+  padding: 16px 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(
+    180deg,
+    rgba(15, 18, 32, 0.85),
+    rgba(2, 6, 23, 0.85)
+  );
+
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  animation: navFadeDown 0.6s ease forwards;
+}
+
+/* subtle entrance */
+@keyframes navFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------- LEFT ---------------- */
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  background: linear-gradient(135deg, #e5e7eb, #c7d2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  cursor: default;
+  user-select: none;
+}
+
+/* ---------------- RIGHT ---------------- */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Login button (soft glass pill) */
+.nav-link-landing {
+  position: relative;
+
+  padding: 10px 22px;
+  border-radius: 999px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #dbeafe;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav-link-landing:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------- CTA ---------------- */
+
+.nav-cta {
+  position: relative;
+  overflow: hidden;
+
+  padding: 12px 30px;
+  border-radius: 999px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* glow sweep effect */
+.nav-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: translateX(-120%);
+}
+
+.nav-cta:hover::before {
+  transform: translateX(120%);
+  transition: transform 0.6s ease;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 18px 50px rgba(99, 102, 241, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 768px) {
+  .top-navbar {
+    padding: 0 22px;
+    height: 72px;
+  }
+
+  .nav-logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-cta {
+    padding: 10px 22px;
+  }
+}
+
+/* ===============================
+   NAVBAR SCROLL BEHAVIOR
+================================ */
+
+.top-navbar {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+
+  transition: background 0.35s ease, backdrop-filter 0.35s ease,
+    box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* When scrolled */
+.top-navbar.scrolled {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 18, 32, 0.75),
+    rgba(2, 6, 23, 0.65)
+  );
+
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+.top-navbar.scrolled {
+  animation: navFloatIn 0.35s ease;
+}
+
+@keyframes navFloatIn {
+  from {
+    transform: translateY(-4px);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* HERO IMAGE */
+.hero-image-wrapper {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  max-width: 720px;
+  width: 100%;
+  height: auto;
+  opacity: 0.95;
+
+  /* smooth entrance */
+  animation: heroFloat 6s ease-in-out infinite;
+}
+
+/* subtle floating animation */
+@keyframes heroFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* responsive tweak */
+@media (max-width: 768px) {
+  .hero-image {
+    max-width: 90%;
+  }
+}
+/* ===============================
+   HERO SECTION (FLEX ROW)
+================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 6vw 80px;
+}
+
+.hero-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+/* LEFT */
+.hero-content {
+  flex: 1;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+/* Buttons */
+.hero-actions {
+  display: flex;
+  gap: 18px;
+}
+
+/* RIGHT */
+.hero-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  max-width: 100%;
+  width: 520px;
+  border-radius: 18px;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.6));
+  animation: floatHero 6s ease-in-out infinite;
+}
+
+/* subtle floating animation */
+@keyframes floatHero {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 50px;
+  }
+
+  .hero-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: 90%;
+    max-width: 420px;
+  }
+}
+
+.status-completed {
+  opacity: 0.75;
+}
+
+.status-deleted {
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+
+.btn-hard-delete {
+  background: rgba(239, 68, 68, 0.15);
+  border: none;
+  color: #ef4444;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-hard-delete i {
+  font-size: 1.1rem;
+}
+
+.btn-hard-delete:hover {
+  background: rgba(239, 68, 68, 0.35);
+  transform: scale(1.05);
+}
+
+.btn-hard-delete:active {
+  transform: scale(0.95);
+}
+
+/* =====================================================
+   TOAST NOTIFICATIONS
+===================================================== */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toast {
+  min-width: 280px;
+  max-width: 360px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  animation: toast-in 0.4s ease forwards;
+}
+
+.toast.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.toast.error {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.toast.info {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+.toast i {
+  font-size: 1.2rem;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
