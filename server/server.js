@@ -1,21 +1,22 @@
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const db = require("./db");
+
+console.log("📂 DB FILE PATH:", path.resolve("./server/db.sqlite"));
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../public")));
 
-// ✅ Serve static files (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, "public")));
-
-// ✅ Landing page route
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+/* ============================
+   NORMALIZE OLD TASKS
+============================ */
+db.run(
+  `UPDATE tasks SET status = 'active' WHERE status IS NULL OR status = ''`
+);
 
 /* ============================
    GET TASKS (FILTERABLE)
@@ -84,14 +85,18 @@ app.put("/tasks/:id", (req, res) => {
 app.delete("/tasks/:id/permanent", (req, res) => {
   const { id } = req.params;
 
-  db.run(`DELETE FROM tasks WHERE id = ?`, [id], function (err) {
-    if (err) {
-      console.error("❌ Permanent delete error:", err);
-      return res.status(500).json(err);
-    }
+  db.run(
+    `DELETE FROM tasks WHERE id = ?`,
+    [id],
+    function (err) {
+      if (err) {
+        console.error("❌ Permanent delete error:", err);
+        return res.status(500).json(err);
+      }
 
-    res.json({ success: true });
-  });
+      res.json({ success: true });
+    }
+  );
 });
 
 const PORT = 3000;
