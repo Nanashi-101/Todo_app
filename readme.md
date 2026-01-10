@@ -8,10 +8,10 @@ It features a clean UI, task prioritization, and categorized task views — buil
 ## 🌟 Preview
 
 ### Landing Page
-![TaskFlow Landing Page](./assets/img2.png)
+![TaskFlow Landing Page](https://github.com/user-attachments/assets/fe1bf250-64bb-4692-9563-9ab5f24940fd)
 
 ### Dashboard / Task View
-![TaskFlow Dashboard](./assets/img1.png)
+![TaskFlow Dashboard](https://github.com/user-attachments/assets/b4771f3a-2c55-4779-a54b-0836c0a92631)
 
 > 📌 **Note:** Place the images inside an `assets/` folder in the root directory for the screenshots to render correctly.
 
